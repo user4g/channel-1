@@ -1,0 +1,51 @@
+/* ریسپانسیو برای دستگاه‌های مختلف */
+@media (max-width: 768px) {
+    .welcome-card {
+        padding: 1.8rem 1.2rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .feature-item {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 580px) {
+    .welcome-card {
+        margin: 1rem;
+    }
+    
+    .cta-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .btn {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .features {
+        gap: 0.8rem;
+    }
+    
+    .social-links {
+        gap: 0.7rem;
+    }
+}
+
+/* حالت تیره (اختیاری) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --card-bg: rgba(15, 23, 42, 0.8);
+    }
+}
