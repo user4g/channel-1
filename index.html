@@ -3,52 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>به سایت ما خوش آمدید</title>
-    
-    <!-- فونت‌ها -->
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- فایل‌های CSS خارجی -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/custom-theme.css"><!-- تم سفارشی -->
+    <title>سایت من - صفحه اصلی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            color: #facc15;
+        }
+
+        .game-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            transition: transform 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-card h2 {
+            color: #facc15;
+            margin-bottom: 1rem;
+        }
+
+        .game-card p {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #facc15, #ffb347);
+            color: #1e293b;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .game-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+    </style>
 </head>
 <body>
-    <!-- محتوای صفحه -->
-    <div class="bg-shape bg-shape-1"></div>
-    <div class="bg-shape bg-shape-2"></div>
-    
-    <!-- هدر داینامیک -->
-    <div id="header-placeholder"></div>
-    
-    <main class="welcome-card">
-        <!-- محتوای اصلی -->
-        <div class="logo-icon">
-            <img src="assets/logo.gif" alt="logo" class="logo-gif">
+    <div class="container">
+        <h1>به <span class="highlight">سایت بازی</span> خوش آمدید</h1>
+        <p style="color: #cbd5e1; margin-bottom: 1rem;">بهترین بازی‌های آنلاین رایگان</p>
+
+        <!-- کارت بازی (لینک به game-1.html) -->
+        <div class="game-card">
+            <h2>🎮 بازی حافظه</h2>
+            <p>حافظه خود را با پیدا کردن جفت کارت‌ها تست کنید!</p>
+            <a href="pages/game-1.html" class="game-link">
+                🚀 شروع بازی 🚀
+            </a>
         </div>
-        
-        <h1>به <span class="highlight">سایت ما</span> خوش آمدید</h1>
-        
+
         <div class="features">
-            <!-- ویژگی‌ها -->
+            <div class="feature">🎯 تمرین مغز</div>
+            <div class="feature">⚡ سرعت بالا</div>
+            <div class="feature">📱 کاملاً واکنش‌گرا</div>
         </div>
-        
-        <div class="cta-group">
-            <a href="pages/about.html" class="btn btn-primary">درباره ما</a>
-            <a href="pages/contact.html" class="btn btn-outline">تماس بگیرید</a>
-        </div>
-    </main>
-    
-    <!-- فوتر داینامیک -->
-    <div id="footer-placeholder"></div>
-    
-    <!-- فایل‌های JavaScript خارجی -->
-    <script src="js/include.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/effects.js"></script>
+    </div>
 </body>
 </html>
