@@ -1,0 +1,43 @@
+/* استایل‌های پایه */
+:root {
+    --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --card-bg: rgba(15, 23, 42, 0.65);
+    --gold-glow: #facc15;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--primary-gradient);
+    font-family: 'Vazirmatn', 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.welcome-card {
+    position: relative;
+    z-index: 10;
+    max-width: 820px;
+    width: 100%;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
+    padding: 2.5rem 2rem;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.welcome-card:hover {
+    transform: translateY(-6px);
+}
