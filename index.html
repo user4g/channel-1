@@ -1,127 +1,302 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه خوش آمدگویی</title>
+    <title>تست نفوذ - SQL Injection Demo</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
-
         .container {
             background: white;
             border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: fadeIn 0.8s ease-in;
+            overflow: hidden;
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 0.5s ease;
         }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #667eea, #764ba2);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
+            padding: 30px;
+            text-align: center;
         }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
         }
-
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-            flex-wrap: wrap;
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
         }
-
-        .feature {
-            padding: 15px;
-            background: #f5f5f5;
+        .warning-badge {
+            background: #ff6b6b;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
-            min-width: 120px;
+            font-size: 14px;
+            transition: all 0.3s;
         }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            h1 {
-                font-size: 1.8em;
-            }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-size: 13px;
+            word-break: break-all;
+            display: none;
+        }
+        .result.error {
+            border-left-color: #dc3545;
+            background: #fff5f5;
+        }
+        .result.success {
+            border-left-color: #28a745;
+            background: #f0fff4;
+        }
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 13px;
+            border: 1px solid #90caf9;
+        }
+        .info-box h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+        .info-box code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #e0e0e0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>به <span class="highlight">سایت ما</span> خوش آمدید</h1>
-        <p>یک بازی جذاب حافظه برای شما آماده کرده‌ایم!</p>
-        
-        <div class="features">
-            <div class="feature">🎮 بازی حافظه</div>
-            <div class="feature">⚡ سرعت بالا</div>
-            <div class="feature">📱 واکنش‌گرا</div>
+        <div class="header">
+            <h1>🐍 تست نفوذ SQL Injection</h1>
+            <p>سیستم آسیب‌پذیر برای آموزش امنیت</p>
+            <span class="warning-badge">⚠️ فقط برای استفاده در محیط آزمایشگاهی</span>
         </div>
-        
-        <div>
-            <!-- این همان دکمه شماست که به بازی لینک می‌دهد -->
-            <a href="pages/game-1.html.html" class="btn">🎮 شروع بازی 🎮</a>
-            <a href="pages/about.html" class="btn">ℹ️ بیشتر بدانید</a>
+        <div class="content">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>نام کاربری</label>
+                    <input type="text" id="username" name="username" placeholder="مثلا: admin" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>رمز عبور</label>
+                    <input type="password" id="password" name="password" placeholder="••••••">
+                </div>
+                <button type="submit">ورود به سیستم</button>
+            </form>
+            <div id="result" class="result"></div>
+            
+            <div class="info-box">
+                <h4>📚 راهنمای تست با Havij</h4>
+                <p><strong>آدرس هدف:</strong> <code id="targetUrl"></code></p>
+                <p><strong>نوع آسیب‌پذیری:</strong> لاگین فرم با SQL Injection (POST Method)</p>
+                <p><strong>مثال اکسپلویت:</strong></p>
+                <code style="display:block; background:#fff; padding:8px; margin-top:5px; border-radius:5px;">
+                    نام کاربری: admin' OR '1'='1' -- <br>
+                    رمز عبور: هر چیزی
+                </code>
+                <p style="margin-top:10px; font-size:12px; color:#666;">
+                    💡 نکته: برای تست با هویج، از گزینه <strong>Post Data</strong> استفاده کنید و داده‌ها را به صورت <code>username=test&password=test</code> وارد کنید.
+                </p>
+            </div>
         </div>
+        <footer>
+            این صفحه فقط برای اهداف آموزشی و تست نفوذ قانونی ساخته شده است
+        </footer>
     </div>
+
+    <script>
+        // شبیه‌سازی دیتابیس (آسیب‌پذیر)
+        const validUsers = [
+            { username: "admin", password: "admin123", role: "مدیر سیستم" },
+            { username: "user", password: "user123", role: "کاربر عادی" },
+            { username: "test", password: "test123", role: "کاربر تست" }
+        ];
+
+        // نمایش آدرس صفحه در راهنما
+        document.getElementById('targetUrl').textContent = window.location.href;
+
+        // تابع شبیه‌سازی SQL Injection
+        function simulateSQLInjection(username, password) {
+            // بررسی SQL Injection در username
+            const sqlPatterns = [
+                { pattern: /'.*OR.*'.*='.*'/i, name: "Basic OR Injection" },
+                { pattern: /'.*OR.*1=1/i, name: "OR 1=1 Injection" },
+                { pattern: /--/g, name: "SQL Comment Injection" },
+                { pattern: /;.*DROP/i, name: "DROP Table Injection" },
+                { pattern: /UNION.*SELECT/i, name: "UNION Injection" },
+                { pattern: /'.*AND.*'.*='.*'/i, name: "AND Injection" },
+                { pattern: /admin'--/i, name: "Admin Bypass" },
+                { pattern: /' OR '1'='1'/i, name: "Classic Bypass" }
+            ];
+
+            let injectionDetected = false;
+            let injectionType = "";
+
+            for (const pattern of sqlPatterns) {
+                if (pattern.pattern.test(username) || pattern.pattern.test(password)) {
+                    injectionDetected = true;
+                    injectionType = pattern.name;
+                    break;
+                }
+            }
+
+            // شبیه‌سازی کوئری SQL آسیب‌پذیر
+            const simulatedQuery = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+            
+            // منطق آسیب‌پذیر
+            let isAuthenticated = false;
+            let message = "";
+            
+            if (injectionDetected) {
+                // در صورت وجود SQL Injection، دور زده می‌شود
+                isAuthenticated = true;
+                message = `✅ تزریق SQL با موفقیت انجام شد! (${injectionType})\n\n`;
+                message += `📝 کوئری اجرا شده:\n${simulatedQuery}\n\n`;
+                message += `🎯 نتیجه: احراز هویت دور زده شد!\n`;
+                message += `👤 شما با دسترسی "مدیر سیستم" وارد شده‌اید.`;
+            } else {
+                // بررسی عادی
+                const user = validUsers.find(u => u.username === username && u.password === password);
+                if (user) {
+                    isAuthenticated = true;
+                    message = `✅ ورود موفقیت‌آمیز!\n\n`;
+                    message += `📝 کوئری اجرا شده:\n${simulatedQuery}\n\n`;
+                    message += `👤 خوش آمدید ${user.role}: ${user.username}`;
+                } else {
+                    message = `❌ خطا: نام کاربری یا رمز عبور اشتباه است.\n\n`;
+                    message += `📝 کوئری اجرا شده:\n${simulatedQuery}\n\n`;
+                    message += `⚠️ این سیستم در برابر SQL Injection آسیب‌پذیر است.`;
+                }
+            }
+
+            return { isAuthenticated, message, simulatedQuery, injectionDetected };
+        }
+
+        // مدیریت فرم
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!username && !password) {
+                resultDiv.className = "result error";
+                resultDiv.style.display = "block";
+                resultDiv.innerHTML = "⚠️ لطفا نام کاربری و رمز عبور را وارد کنید.";
+                return;
+            }
+            
+            // شبیه‌سازی SQL Injection
+            const result = simulateSQLInjection(username, password);
+            
+            // نمایش نتیجه
+            resultDiv.className = "result " + (result.isAuthenticated ? "success" : "error");
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML = result.message.replace(/\n/g, '<br>');
+            
+            // لاگ در کنسول برای دیباگ
+            console.clear();
+            console.log("%c=== SQL Injection Test ===", "color: #667eea; font-size: 14px; font-weight: bold");
+            console.log("Username:", username);
+            console.log("Password:", password);
+            console.log("Simulated Query:", result.simulatedQuery);
+            console.log("Injection Detected:", result.injectionDetected);
+            console.log("Authenticated:", result.isAuthenticated);
+            
+            // اگر SQL Injection شناسایی شد، هشدار ویژه
+            if (result.injectionDetected) {
+                console.log("%c🔥 SQL Injection Payload Detected!", "color: red; font-weight: bold; font-size: 12px");
+            }
+        });
+
+        // اضافه کردن پیشنهادات تست به console
+        console.log("%c=== Havij SQL Injection Test Page ===", "color: #28a745; font-size: 16px; font-weight: bold");
+        console.log("%cآدرس هدف:", "color: #667eea", window.location.href);
+        console.log("%cنوع درخواست: POST", "color: #667eea");
+        console.log("%cداده‌های تست:", "color: #667eea");
+        console.log("  • username=admin' OR '1'='1' -- &password=anything");
+        console.log("  • username=admin'--&password=test");
+        console.log("  • username=' OR 1=1 --&password=");
+        console.log("  • username=admin' UNION SELECT 1,2,3 --&password=");
+    </script>
 </body>
 </html>
